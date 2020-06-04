@@ -1,7 +1,7 @@
 import WebSocketKit
 import NIO
 
-class APIWebSocketController {
+public final class APIWebSocketController {
     init() {
     }
     func run() throws {
