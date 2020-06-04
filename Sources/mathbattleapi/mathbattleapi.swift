@@ -19,6 +19,7 @@ public final class APIWebSocketController {
             ws.onText { ws, text in
                 if (text == "AUTH_FAILED") {
                     print("Auth failed")
+                    ws.close()
                 }
                 else {
                     print("Auth success")
