@@ -2,9 +2,9 @@ import WebSocketKit
 import NIO
 
 public final class APIWebSocketController {
-    init() {
+    public init() {
     }
-    func run() throws {
+    public func run() throws {
         let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 2)
         let promise = eventLoopGroup.next().makePromise(of: String.self)
 
