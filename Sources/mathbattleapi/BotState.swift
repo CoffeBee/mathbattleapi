@@ -6,10 +6,9 @@
 //
 
 import Foundation
+import WebSocketKit
 
-open class BotState {
-    
-    public init() {
-        
-    }
+public protocol BotState {
+    var bot: Bot { get }
+    mutating func onEvent(ws: WebSocket, data: Codable)
 }

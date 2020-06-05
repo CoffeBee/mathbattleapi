@@ -25,7 +25,7 @@ public final class Bot {
     let api_url: String
     var ws: WebSocket?
     var httpClient: HTTPClient?
-    var initialState: BotState?
+    var state: BotState?
     var authCompleted: Bool = false
     
     public init(token: String, api_url: String = "api.math.silaeder.ru") {
@@ -34,12 +34,16 @@ public final class Bot {
     }
     
     public func setInitialState(_ botState: BotState) {
-        self.initialState = botState
+        self.state = botState
+    }
+    
+    func changeState(newState: BotState) {
+        self.state = newState
     }
     
     public func run() throws {
         
-        if (self.initialState == nil) {
+        if (self.state == nil) {
             throw BotConfigError.noInitialState
         }
         
@@ -54,6 +58,11 @@ public final class Bot {
                 }
                 else {
                     self.authCompleted = true
+                    ws.onClose.whenComplete { ws in
+                        print("Connection closed")
+                    }
+                    ws.onText { ws, text in
+                    }
                     print("Auth success")
                 }
             }

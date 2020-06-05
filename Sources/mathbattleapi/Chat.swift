@@ -10,17 +10,32 @@ import AsyncHTTPClient
 
 open class Chat {
     
+    var bot: Bot
     
-    public init() {
+    public init(bot: Bot) {
+        self.bot = bot
+    }
+    
+    final public func sendMessage(httpClient: HTTPClient, text: String) throws {
         
     }
     
-    public func sendMessage(httpClient: HTTPClient,text: String) {
-        
-    }
-    
-    public func addMember(httpClient: HTTPClient, user: User) {
-        
+    final public func addMember(httpClient: HTTPClient, user: User) throws {
+        var request = try HTTPClient.Request(url: "http://\(self.bot.api_url)/bot/chats/add", method: .POST)
+        request.headers.add(name: "Content-Type", value: "application/x-www-form-urlencoded")
+        request.body = .string(<#T##string: String##String#>)
+        self.bot.httpClient!.execute(request: request).whenComplete { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let response):
+                if response.status == .ok {
+                    
+                } else {
+                    print("Error occures while sending message", response.body)
+                }
+            }
+        }
     }
     
     
