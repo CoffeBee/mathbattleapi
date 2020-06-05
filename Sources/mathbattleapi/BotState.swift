@@ -9,7 +9,7 @@ import Foundation
 
 open class BotState {
     
-    init() {
+    public init() {
         
     }
 }
