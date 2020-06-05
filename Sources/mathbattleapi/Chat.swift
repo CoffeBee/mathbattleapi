@@ -8,7 +8,7 @@
 import Foundation
 import AsyncHTTPClient
 
-public class Chat {
+open class Chat {
     
     
     public init() {

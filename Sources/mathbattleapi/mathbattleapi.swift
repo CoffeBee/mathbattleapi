@@ -38,9 +38,11 @@ public final class Bot {
     }
     
     public func run() throws {
+        
         if (self.initialState == nil) {
             throw BotConfigError.noInitialState
         }
+        
         let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 2)
         let promise = eventLoopGroup.next().makePromise(of: String.self)
         WebSocket.connect(to: "ws://\(self.api_url)/bot/ws", on: eventLoopGroup) { ws in

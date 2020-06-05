@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class BotState {
+open class BotState {
     
     init() {
         
