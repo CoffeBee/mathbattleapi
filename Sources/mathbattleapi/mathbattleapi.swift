@@ -15,6 +15,10 @@ enum BotAuthError: Error {
     case notCorrectToken
 }
 
+enum BotConfigError: Error {
+    case noInitialState
+}
+
 public final class Bot {
     
     let token: String
@@ -28,16 +32,22 @@ public final class Bot {
         self.token = token
         self.api_url = api_url
     }
+    
     public func setInitialState(_ botState: BotState) {
         self.initialState = botState
     }
+    
     public func run() throws {
+        if (self.initialState == nil) {
+            throw BotConfigError.noInitialState
+        }
         let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 2)
         let promise = eventLoopGroup.next().makePromise(of: String.self)
         WebSocket.connect(to: "ws://\(self.api_url)/bot/ws", on: eventLoopGroup) { ws in
             ws.send(self.token)
             ws.onText { ws, text in
                 if (text == "AUTH_FAILED") {
+                    print("Auth failed")
                     ws.close()
                 }
                 else {
