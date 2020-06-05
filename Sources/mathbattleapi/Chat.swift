@@ -23,7 +23,6 @@ open class Chat {
     final public func addMember(httpClient: HTTPClient, user: User) throws {
         var request = try HTTPClient.Request(url: "http://\(self.bot.api_url)/bot/chats/add", method: .POST)
         request.headers.add(name: "Content-Type", value: "application/x-www-form-urlencoded")
-        request.body = .string(<#T##string: String##String#>)
         self.bot.httpClient!.execute(request: request).whenComplete { result in
             switch result {
             case .failure(let error):
