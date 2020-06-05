@@ -18,6 +18,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/websocket-kit.git", from: "2.0.0"),
+        .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.0.0")
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -29,6 +30,7 @@ let package = Package(
             
             dependencies: [
                 .product(name: "WebSocketKit", package: "websocket-kit"),
+                .product(name: "AsyncHTTPClient", package: "async-http-client")
                     ]
         ),
         .testTarget(
